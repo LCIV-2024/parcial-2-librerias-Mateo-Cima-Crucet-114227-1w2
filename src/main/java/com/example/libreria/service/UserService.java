@@ -6,6 +6,7 @@ import com.example.libreria.model.User;
 import com.example.libreria.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +17,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class UserService {
-    
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
     
     @Transactional
     public UserResponseDTO createUser(UserRequestDTO requestDTO) {
@@ -31,7 +32,7 @@ public class UserService {
         user.setPhoneNumber(requestDTO.getPhoneNumber());
         
         User savedUser = userRepository.save(user);
-        log.info("Created user with id: {}", savedUser.getId());
+
         return convertToDTO(savedUser);
     }
     
@@ -65,7 +66,7 @@ public class UserService {
         user.setPhoneNumber(requestDTO.getPhoneNumber());
         
         User updatedUser = userRepository.save(user);
-        log.info("Updated user with id: {}", updatedUser.getId());
+
         return convertToDTO(updatedUser);
     }
     
@@ -75,7 +76,7 @@ public class UserService {
             throw new RuntimeException("Usuario no encontrado con ID: " + id);
         }
         userRepository.deleteById(id);
-        log.info("Deleted user with id: {}", id);
+
     }
     
     @Transactional(readOnly = true)

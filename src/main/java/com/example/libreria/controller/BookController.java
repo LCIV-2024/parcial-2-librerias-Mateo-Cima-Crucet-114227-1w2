@@ -3,6 +3,7 @@ package com.example.libreria.controller;
 import com.example.libreria.dto.BookResponseDTO;
 import com.example.libreria.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +13,9 @@ import java.util.List;
 @RequestMapping("/api/books")
 @RequiredArgsConstructor
 public class BookController {
-    
-    private final BookService bookService;
+
+    @Autowired
+    private BookService bookService;
     
     @PostMapping("/sync")
     public ResponseEntity<String> syncBooks() {

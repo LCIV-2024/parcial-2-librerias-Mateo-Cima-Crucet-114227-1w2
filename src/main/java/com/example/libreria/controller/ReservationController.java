@@ -6,6 +6,7 @@ import com.example.libreria.dto.ReturnBookRequestDTO;
 import com.example.libreria.service.ReservationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,9 @@ import java.util.List;
 @RequestMapping("/api/reservations")
 @RequiredArgsConstructor
 public class ReservationController {
-    
-    private final ReservationService reservationService;
+
+    @Autowired
+    private ReservationService reservationService;
     
     @PostMapping
     public ResponseEntity<ReservationResponseDTO> createReservation(

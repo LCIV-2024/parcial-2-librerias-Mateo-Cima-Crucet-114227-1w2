@@ -5,6 +5,7 @@ import com.example.libreria.dto.UserResponseDTO;
 import com.example.libreria.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,34 +16,39 @@ import java.util.List;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
-    
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
     
     @PostMapping
     public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserRequestDTO requestDTO) {
-       // TODO: Implementar la creación de un usuario
+        UserResponseDTO respuesta = userService.createUser(requestDTO);
+        return new ResponseEntity<>(respuesta, HttpStatus.CREATED);
     }
     
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
-        // TODO: Implementar la obtención de un usuario por su ID
+        UserResponseDTO respuesta = userService.getUserById(id);
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
     
     @GetMapping
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
-        //TODO: Implementar la obtención de todos los usuarios
+        List<UserResponseDTO> respuesta = userService.getAllUsers();
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
     
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(
             @PathVariable Long id,
             @Valid @RequestBody UserRequestDTO requestDTO) {
-        //TODO: Implementar la actualización de un usuario
+        UserResponseDTO respuesta = userService.updateUser(id, requestDTO);
+        return new ResponseEntity<>(respuesta, HttpStatus.OK);
     }
     
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        //TODO: Implementar la eliminación de un usuario
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
 

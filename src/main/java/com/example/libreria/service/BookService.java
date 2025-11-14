@@ -6,6 +6,7 @@ import com.example.libreria.model.Book;
 import com.example.libreria.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +17,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class BookService {
-    
-    private final BookRepository bookRepository;
-    private final ExternalBookService externalBookService;
+
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private ExternalBookService externalBookService;
     
     @Transactional
     public void syncBooksFromExternalApi() {
-        log.info("Synchronizing books from external API");
         List<ExternalBookDTO> externalBooks = externalBookService.fetchAllBooks();
         
         for (ExternalBookDTO externalBook : externalBooks) {
@@ -34,15 +36,12 @@ public class BookService {
                 newBook.setStockQuantity(10); // Stock inicial por defecto
                 newBook.setAvailableQuantity(10);
                 bookRepository.save(newBook);
-                log.info("Created new book: {}", newBook.getTitle());
             } else {
                 // Actualizar información del libro
                 updateBookFromExternal(existingBook, externalBook);
                 bookRepository.save(existingBook);
-                log.info("Updated book: {}", existingBook.getTitle());
             }
         }
-        log.info("Synchronization completed");
     }
     
     @Transactional(readOnly = true)

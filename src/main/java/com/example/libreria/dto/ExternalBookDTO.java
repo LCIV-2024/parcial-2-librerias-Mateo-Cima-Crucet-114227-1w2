@@ -30,5 +30,62 @@ public class ExternalBookDTO {
     private Integer firstPublishYear;
     
     private BigDecimal price;
+    
+
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public Boolean getHasFulltext() {
+        return hasFulltext;
+    }
+    
+    public void setHasFulltext(Boolean hasFulltext) {
+        this.hasFulltext = hasFulltext;
+    }
+    
+    public Integer getEditionCount() {
+        return editionCount;
+    }
+    
+    public void setEditionCount(Integer editionCount) {
+        this.editionCount = editionCount;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public List<String> getAuthorName() {
+        return authorName;
+    }
+    
+    public void setAuthorName(List<String> authorName) {
+        this.authorName = authorName;
+    }
+    
+    public Integer getFirstPublishYear() {
+        return firstPublishYear;
+    }
+    
+    public void setFirstPublishYear(Integer firstPublishYear) {
+        this.firstPublishYear = firstPublishYear;
+    }
+    
+    public BigDecimal getPrice() {
+        return price;
+    }
+    
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 }
 

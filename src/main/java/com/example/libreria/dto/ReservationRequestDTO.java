@@ -25,5 +25,38 @@ public class ReservationRequestDTO {
     
     @NotNull(message = "La fecha de inicio es obligatoria")
     private LocalDate startDate;
+    
+
+    public Long getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    
+    public Long getBookExternalId() {
+        return bookExternalId;
+    }
+    
+    public void setBookExternalId(Long bookExternalId) {
+        this.bookExternalId = bookExternalId;
+    }
+    
+    public Integer getRentalDays() {
+        return rentalDays;
+    }
+    
+    public void setRentalDays(Integer rentalDays) {
+        this.rentalDays = rentalDays;
+    }
+    
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+    
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
 }
 

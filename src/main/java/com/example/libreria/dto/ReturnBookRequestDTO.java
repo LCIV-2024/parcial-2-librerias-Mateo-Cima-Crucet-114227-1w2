@@ -14,5 +14,14 @@ public class ReturnBookRequestDTO {
     
     @NotNull(message = "La fecha de devolución es obligatoria")
     private LocalDate returnDate;
+    
+
+    public LocalDate getReturnDate() {
+        return returnDate;
+    }
+    
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
+    }
 }
 
